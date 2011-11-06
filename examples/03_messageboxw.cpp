@@ -17,8 +17,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvRese
 		case DLL_PROCESS_ATTACH:
 			try
 			{
-				HMODULE User32 = GetModuleHandle("User32.dll");	
-				detour_MessageBoxW = new MologieDetours::Detour<tMessageBoxW>(User32, "MessageBoxW", hook_MessageBoxW);
+				detour_MessageBoxW = new MologieDetours::Detour<tMessageBoxW>("User32.dll", "MessageBoxW", hook_MessageBoxW);
 			}
 			catch(MologieDetours::DetourException &e)
 			{

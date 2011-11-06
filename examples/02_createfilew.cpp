@@ -17,8 +17,7 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvRese
 		case DLL_PROCESS_ATTACH:
 			try
 			{
-				HMODULE Kernel32 = GetModuleHandle("Kernel32.dll");	
-				detour_CreateFileW = new MologieDetours::Detour<tCreateFileW>(Kernel32, "CreateFileW", hook_CreateFileW);
+				detour_CreateFileW = new MologieDetours::Detour<tCreateFileW>("Kernel32.dll", "CreateFileW", hook_CreateFileW);
 			}
 			catch(MologieDetours::DetourException &e)
 			{

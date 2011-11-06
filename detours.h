@@ -208,6 +208,23 @@ namespace MologieDetours
 		}
 #ifdef WIN32
 		/**
+		 * @fn	Detour::Detour(const char* moduleName, const char* lpProcName, function_type pDetour)
+		 *
+		 * @brief	Creates a new local detour on an exported function.
+		 *
+		 * @author	Kai Uwe Jesussek
+		 * @date	06.11.2011
+		 *
+		 * @param	moduleName  The Name of the module.
+		 * @param	lpProcName	Name of the pointer to a proc.
+		 * @param	pDetour   	The detour.
+		 */
+		Detour(const char* moduleName, const char* lpProcName, function_type pDetour)
+			: pSource_(reinterpret_cast<function_type>(GetProcAddress(GetModuleHandle(moduleName), lpProcName))), pDetour_(pDetour), instructionCount_(0)
+		{
+			CreateDetour();
+		}
+		/**
 		 * @fn	Detour::Detour(HMODULE module, const char* lpProcName, function_type pDetour)
 		 *
 		 * @brief	Creates a new local detour on an exported function.
