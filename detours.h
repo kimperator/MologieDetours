@@ -51,10 +51,10 @@
 #  include <unistd.h>
 #  define MOLOGIE_DETOURS_MEMORY_POSIX_PAGEPROTECT(ADDRESS, SIZE, NEWPROT) \
 	( \
-		mprotect((void*)((((unsigned int)(ADDRESS) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_), pageSize_, NEWPROT) == 0 \
+		mprotect((void*)((((uintptr_t)(ADDRESS) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_), pageSize_, NEWPROT) == 0 \
 	&&	( \
-			((((unsigned int)(ADDRESS) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_) == ((((unsigned int)(ADDRESS) + (SIZE) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_) \
-		||	mprotect((void*)((((unsigned int)(ADDRESS) + (SIZE) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_), pageSize_, NEWPROT) == 0 \
+			((((uintptr_t)(ADDRESS) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_) == ((((uintptr_t)(ADDRESS) + (SIZE) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_) \
+		||	mprotect((void*)((((uintptr_t)(ADDRESS) + (SIZE) + pageSize_ - 1) & ~(pageSize_ - 1)) - pageSize_), pageSize_, NEWPROT) == 0 \
 		) \
 	)
 #  define MOLOGIE_DETOURS_MEMORY_UNPROTECT(ADDRESS, SIZE, OLDPROT) MOLOGIE_DETOURS_MEMORY_POSIX_PAGEPROTECT((ADDRESS), (SIZE), PROT_READ | PROT_WRITE | PROT_EXEC)
