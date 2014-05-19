@@ -31,7 +31,7 @@
 #if (defined(_M_IX86) || defined(___i386__) || defined(__i386) || defined(__X86__) || defined(_X86_) || defined(__I86__))
 #  define MOLOGIE_DETOURS_HDE_32
 #  include "hde32/include/hde32.h"
-#elif (defined(_M_X64)) // TODO: Add more predefined macros for more compilers
+#elif (defined(_M_X64) || defined(__x86_64__)) // TODO: Add more predefined macros for more compilers
 #  define MOLOGIE_DETOURS_HDE_64
 #  include "hde64/include/hde64.h"
 #else
